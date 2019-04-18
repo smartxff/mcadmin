@@ -53,4 +53,5 @@ func mainMc(ctx *cli.Context){
 
 	Command(addAlias).run()
 
+
 }

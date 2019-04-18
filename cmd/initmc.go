@@ -2,17 +2,18 @@ package cmd
 
 import (
 	"fmt"
-	"log"
 	"runtime"
 	"strings"
+	"log"
 )
 
-var baseScript = `
-echo "PATH=$PWD:$PATH" >> ~/.bashrc
+var bashScript = `
+echo "export PATH=$PWD:\$PATH" >> ~/.bashrc
 `
 
 var batScript = `
-set PATH = %cd%;%PATH%
+setx "Path"  "%cd%;%Path%" /m
+set path_=%cd%;%Path%
 pause
 `
 
@@ -48,6 +49,8 @@ func (s *linux)GetMcUrl()string{
 
 func (s *linux)ExecInitScript(){
 	//todo
+	cmd := Command{"sh","-c",bashScript}
+	cmd.run()
 }
 
 
@@ -61,4 +64,6 @@ func (s *linux)isPPC()bool{
 
 func (s *windows)ExecInitScript(){
 	//todo
+	cmd := Command{"cmd","/c",batScript}
+	cmd.run()
 }
