@@ -4,7 +4,6 @@ import (
 	"github.com/minio/cli"
 	"gopkg.in/AlecAivazis/survey.v1"
 	"log"
-	"os/exec"
 )
 var mcCmd = cli.Command{
 	Name: "mc",
@@ -48,9 +47,10 @@ func mainMc(ctx *cli.Context){
 		log.Fatalf("内部错误:%s\n",err.Error())
 		return
 	}
-	err = exec.Command("mc","config","host","add","minio",host.Server,host.Accesskey,host.Secretkey).Run()
-	if err !=nil{
-		log.Fatalf("初始化失败：%s\n",err.Error())
-	}
+
+
+	addAlias := []string{"mc","config","host","add","minio",host.Server,host.Accesskey,host.Secretkey}
+
+	Command(addAlias).run()
 
 }

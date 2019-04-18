@@ -4,6 +4,7 @@ import (
 	"github.com/smartxff/wget-go/wget"
 	"log"
 	"os"
+	"path"
 )
 
 var (
@@ -27,7 +28,8 @@ func installmc(){
 	url := goos.GetMcUrl()
 	log.Printf("mc 下载地址：%s\n",url)
 	w := wget.Wget(url)
-	w.OutputFilename = "mc"
+
+	w.OutputFilename = path.Base(url)
 	err,n := w.Exec(os.Stdin,os.Stdout,os.Stderr)
 	if err !=nil{
 		log.Fatalf("下载文件出错：%s,%d",err.Error(),n)
