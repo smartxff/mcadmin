@@ -36,7 +36,7 @@ func CheckOS()goos{
 }
 
 func (s *windows)GetMcUrl()string{
-	return fmt.Sprintf(BASEURL,WINDOWS,AMD64)
+	return fmt.Sprintf(BASEURL,WINDOWS,AMD64)+".exe"
 }
 
 func (s *linux)GetMcUrl()string{
